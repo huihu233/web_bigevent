@@ -53,9 +53,10 @@ $(function() {
   
   // 监听注册表单的提交事件
   $('#form-res').on('submit', function(e) {
-    e.preventDefault()
+    // afsdf
+    e.preventDefault();
     $.ajax({
-      url: "http://api-breakingnews-web.itheima.net/api/reguser",
+      url: "/api/reguser",
       type: 'post',
       data: {
         username: $('#form-res [name=username]').val(),
@@ -70,5 +71,30 @@ $(function() {
         layer.msg("注册成功");
       }
     })
-  })  
+  })
+  
+  // 监听登录事件
+  $("#form_login").on('submit', function(e) {
+    // 阻止默认提交行为
+    e.preventDefault();
+    $.ajax({
+      url: '/api/login',
+      type: 'post',
+      data: $(this).serialize(),
+      success: function(res) {
+        if(res.status !== 0) {
+          return layer.msg(res.message);
+        }
+        layer.msg("登录成功!!!");
+        // console.log(res.token);
+
+        // 将登录成功得到的 token 字符串,保存到localStorage 中
+        localStorage.setItem('token', res.token);
+
+        // 跳转登录后台主页
+        location.href = '/index.html'
+      } 
+    })
+  })
+
 })
