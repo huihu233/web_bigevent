@@ -18,3 +18,31 @@ iframe {
 a {
   transition: none !important;
 }
+
+.userinfo {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  user-select: none;
+}
+.layui-side-scroll .userinfo {
+  border-bottom: 1px solid #23262E;
+}
+
+.layui-nav-img {
+  width: 40px;
+  height: 40px;
+}
+
+.text-avatar {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #009688;
+  border-radius: 50%;
+  font-size: 20px;
+  color: #fff;
+  position: relative;
+  top: 3px;
+}
