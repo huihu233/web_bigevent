@@ -3,6 +3,7 @@ $(function() {
 
   // 获取裁剪区域的DOM元素
   var $image = $('#image')
+  console.log($image);
   // 配置选项
   const options = {
     // 纵横比
