@@ -63,7 +63,7 @@ $(function() {
         if(res.status !== 0) {
           return layer.msg(res.message)
         }
-        console.log(res);
+        // console.log(res);
         var htmlStr = template('tpl-table', res);
         // console.log(htmlStr, data.data)
         $("tbody").html(htmlStr);
@@ -118,7 +118,7 @@ $(function() {
       limits: [2,3,5,10],
       // 分页发生切换的时候，触发 jump 回调
       jump: function(obj, first) {
-        console.log(obj.curr);
+        // console.log(obj.curr);
         // console.log(first);
         // 把最新的页码值，赋值到 q这个查询参数
         q.pagenum = obj.curr;
@@ -161,6 +161,59 @@ $(function() {
       layer.close(index);
     });
   })
+
+  var indexEdit;
+  // 通过事件代理为编辑绑定点击事件
+  $('tbody').on('click','.btn-edit', function() {
+    
+    indexEdit = layer.open({
+      type: 1,
+      area: ['500px', '300px'],
+      title: '编辑文章列表',
+      content: $('#dialog-edit').html()
+    });
+
+    var id = $(this).attr('data-id')
+    // 发起ajax请求
+    $.ajax({
+      method: 'get',
+      url: '/my/article/' + id,
+      success: function(res) {
+        if(res.status !== 0) {
+          return layer.msg(res.message);
+        }
+        form.val('form-edit', res.data);
+      }
+    })
+  })
+  // 为确定修改
+  $('body').on('submit', '#form-edit', function(e) {
+    // 阻止默认事件
+    e.preventDefault();
+    var fd = new FormData($(this)[0]);
+    fd.forEach((v, k) => {
+      console.log(k, v);
+    })
+    publishArticle(fd);
+    initTable();
+  })
+  function publishArticle(fd) {
+    $.ajax({
+      method: 'post',
+      url: '/my/article/edit',
+      data: fd,
+      contentType: false,
+      processData: false,
+      success: function(res) {
+        if(res.status !== 0) {
+          return layer.msg(res.message)
+        }
+        console.log(res.data)
+        
+        // 发布文章成功后跳转到
+      }
+    })
+  }
 })
 
 

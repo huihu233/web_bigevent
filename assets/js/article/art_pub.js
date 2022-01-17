@@ -84,7 +84,6 @@ $(function(){
       console.log(res);
       publishArticle(fd);
     })
-    
   })
 
   // 定义一个发布文章的方法

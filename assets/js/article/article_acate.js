@@ -48,8 +48,8 @@ $(function() {
         layer.close(index);
       }
     })
-    layer.msg("功能有误!!!");
-    console.log($(this).serialize().split('&'));
+    // layer.msg("功能有误!!!");
+    // console.log($(this).serialize().split('&'));
   })
 
 
@@ -60,8 +60,8 @@ $(function() {
     indexEdit = layer.open({
       type: 1,
       area: ['500px', '300px'],
-      title: '编辑文章分类'
-      ,content: $('#dialog-edit').html()
+      title: '编辑文章分类',
+      content: $('#dialog-edit').html()
     });
 
     var id = $(this).attr('data-id');
